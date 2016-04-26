@@ -1,4 +1,4 @@
-""" This file defines an agent for the PR2 ROS environment. """
+""" This file defines an agent for the UR5 ROS environment. """
 import copy
 import time
 import numpy as np
