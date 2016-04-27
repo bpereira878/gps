@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+    <param name="GPSUR5Plugin/type" value="gps_agent_pkg/GPSUR5Plugin" />
+    
+    <rosparam command="load" file="$(find gps_agent_pkg)/launch/arm_controller_ur5.yaml" />
+
+    <!-- controller params -->
+    <param name="GPSUR5Plugin/root_name" value="base_link" />
+    <param name="GPSUR5Plugin/active_tip_name" value="ee_link" />
+
+    <!-- kalman filter matrices -->
+    <param name="GPSUR5Plugin/encoder_filter_params" textfile="$(find gps_agent_pkg)/encoder_filter_params.txt" />
+
+    <!-- Spawn Controller -->
+    <node name="arm_controller_spawner"
+         pkg="controller_manager" type="spawner" output="screen"
+         args="spawn GPSUR5Plugin" />
+
+</launch>

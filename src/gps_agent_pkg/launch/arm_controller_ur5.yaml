@@ -1,0 +1,6 @@
+active_arm_joint_name_1: "shoulder_pan_joint"
+active_arm_joint_name_2: "shoulder_lift_joint"
+active_arm_joint_name_3: "elbow_joint"
+active_arm_joint_name_4: "wrist_1_joint"
+active_arm_joint_name_5: "wrist_2_joint"
+active_arm_joint_name_6: "wrist_3_joint"

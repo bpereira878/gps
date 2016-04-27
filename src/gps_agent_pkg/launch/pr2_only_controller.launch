@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <launch>
     <param name="GPSPR2Plugin/type" value="gps_agent_pkg/GPSPR2Plugin" />
     <!-- rosparam command="load" file="$(find gps_agent_pkg)/launch/pr2_head_controller.yaml" -->

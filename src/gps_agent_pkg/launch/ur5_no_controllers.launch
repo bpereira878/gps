@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="limited" default="false"/>
+
+  <!-- same as pr2_gazebo_no_controller.launch -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+  <!-- Uncomment if using distro prior to hydro <include file="$(find gazebo_worlds)/launch/empty_world.launch"> -->
+  </include>
+  
+  <!-- same as $(find pr2_gazebo)/launch/pr2_no_controllers.launch, 
+       from file: /opt/ros/indigo/share/ur_gazebo/launch/ur5.launch -->
+  <!-- send ur5 urdf to param server -->
+  <include file="$(find ur_description)/launch/ur5_upload.launch">
+    <arg name="limited" value="$(arg limited)"/>
+  </include>
+
+  <!-- same as $(find pr2_gazebo)/launch/pr2_no_controllers.launch, 
+       from file: /opt/ros/indigo/share/ur_gazebo/launch/ur5.launch -->
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <node name="spawn_ur5_model" pkg="gazebo_ros" type="spawn_model" args="$(optenv ROBOT_INITIAL_POSE) -unpause -urdf -param robot_description -model robot -ros_namespace /gazebo" respawn="false" output="screen" />
+
+  <!-- same as $(find pr2_controller_manager)/controller_manager.launch, 
+       from file: /opt/ros/indigo/share/ur_gazebo/launch/controller_utils.launch -->
+  <!-- Robot state publisher -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="50.0" />
+    <param name="tf_prefix" type="string" value="" />
+  </node>
+
+  <!-- same as $(find pr2_gazebo)/launch/pr2_bringup.launch, 
+       from file: /opt/ros/indigo/share/ur_gazebo/launch/controller_utils.launch -->
+  <!-- Fake Calibration -->
+  <node pkg="rostopic" type="rostopic" name="fake_joint_calibration"
+        args="pub /calibrated std_msgs/Bool true" />
+
+  
+</launch>

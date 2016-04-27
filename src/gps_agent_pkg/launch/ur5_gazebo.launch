@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+
+	<include file="$(find gps_agent_pkg)/launch/ur5_no_controllers.launch" />
+
+	<include file="$(find gps_agent_pkg)/launch/ur5_only_controller.launch" />
+
+</launch>
